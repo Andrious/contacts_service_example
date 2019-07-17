@@ -21,17 +21,56 @@
 ///
 ///
 
-import 'package:flutter/material.dart' show BuildContext;
+import 'package:flutter/material.dart' show BuildContext, Colors, ThemeData;
 
-import 'package:mxc_application/mvc.dart' show ViewMVC;
+import 'package:flutter/material.dart' show NavigatorObserver, Route;
 
-import 'package:contacts_androidx_example/view.dart'
-    show AddContactPage, ContactListPage;
+import 'package:contacts_androidx_example/src/view.dart'
+    show AddContactPage, ContactListPage, AppView;
 
-class ContactsExampleApp extends ViewMVC {
+class ContactsExampleApp extends AppView {
   ContactsExampleApp()
       : super(
-            title: 'Contacts Plugin Example',
-            routes: {'/add': (BuildContext context) => AddContactPage()},
-            home: ContactListPage());
+          title: 'Contacts Plugin Example',
+          routes: {'/add': (BuildContext context) => AddContactPage()},
+          home: ContactListPage(),
+          navigatorObservers: [NavListener()],
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            accentColor: Colors.orangeAccent[400],
+          ),
+        );
+}
+
+class NavListener extends NavigatorObserver {
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+    if (navigator == null)
+      print("route ${route?.toString()} previous ${previousRoute?.toString()}");
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print("route ${route?.toString()} previous ${previousRoute?.toString()}");
+  }
+
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print("route ${route?.toString()} previous ${previousRoute?.toString()}");
+  }
+
+  @override
+  void didReplace({Route<dynamic> newRoute, Route<dynamic> oldRoute}) {
+    print("route ${newRoute?.toString()} previous ${oldRoute?.toString()}");
+  }
+
+  @override
+  void didStartUserGesture(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print("route ${route?.toString()} previous ${previousRoute?.toString()}");
+  }
+
+  @override
+  void didStopUserGesture() {
+    print("The gesture stopped.");
+  }
 }

@@ -42,21 +42,19 @@ import 'package:flutter/material.dart'
         ThemeData,
         Widget;
 
-import 'package:mxc_application/app.dart' show App;
+import 'package:contacts_androidx_example/src/model.dart' show Contact;
 
-import 'package:mxc_application/view.dart'
+import 'package:contacts_androidx_example/src/view.dart'
     show
+        App,
         EditBarButton,
         HomeBarButton,
         SearchBarButton,
         SimpleBottomAppBar,
-        showBox;
+        showBox,
+        AddContactPage;
 
-import 'package:contacts_androidx_example/model.dart' show Contact;
-
-import 'package:contacts_androidx_example/view.dart' show AddContactPage;
-
-import 'package:contacts_androidx_example/controller.dart' show Controller;
+import 'package:contacts_androidx_example/src/controller.dart' show Controller;
 
 enum AppBarBehavior { normal, pinned, floating, snapping }
 

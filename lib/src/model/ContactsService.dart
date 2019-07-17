@@ -25,15 +25,14 @@ import 'dart:async' show Future;
 import 'dart:core'
     show Future, List, Map, MapEntry, String, bool, dynamic, int, override;
 
-import 'package:mxc_application/model.dart' show Database, DBInterface;
+import 'package:contacts_androidx_example/src/model.dart'
+    show Contact, Database, DBInterface;
 
-import '../../model.dart' show Contact;
-
-import '../../view.dart' show Item;
+import 'package:contacts_androidx_example/src/view.dart' show Item;
 
 class ContactsService extends DBInterface {
   factory ContactsService() {
-    if (_this == null) _this = ContactsService._();
+    _this ??= ContactsService._();
     return _this;
   }
 
@@ -139,45 +138,38 @@ class ContactsService extends DBInterface {
     return contactList;
   }
 
-  static Future<bool> addContact(Map contact) async {
-    bool add = await _this.saveMap('Contacts', contact);
-    if (add) {
-      Map map = Map();
+  static Future<bool> addContact(Map<String, dynamic> contact) async {
+    Map<String, dynamic> recSaved = await _this.saveMap('Contacts', contact);
+    if (recSaved.isNotEmpty) {
+      contact.addEntries(recSaved.entries);
+      Map<String, dynamic> map = Map();
       map.addAll({'userid': contact['id']});
-      for (Map phone in contact['phones']) {
+      for (Map<String, dynamic> phone in contact['phones']) {
         map.addAll(phone);
       }
-      if (map.length > 1) add = await _this.saveMap('Phones', map);
+      if (map.length > 1) recSaved = await _this.saveMap('Phones', map);
     }
-    if (add) {
-      Map map = Map();
+    if (recSaved.isNotEmpty) {
+      Map<String, dynamic> map = Map();
       map.addAll({'userid': contact['id']});
-      for (Map email in contact['emails']) {
+      for (Map<String, dynamic> email in contact['emails']) {
         map.addAll(email);
       }
-      if (map.length > 1) add = await _this.saveMap('Emails', map);
+      if (map.length > 1) recSaved = await _this.saveMap('Emails', map);
     }
 //       await _this.saveMap('addresses', contact['postalAddresses']);
-    return add;
+    return recSaved.isNotEmpty;
 //   });
   }
 
   static func(key, value) {}
 
-  static Future<bool> deleteContact(Map contact) async {
+  static Future<bool> deleteContact(Map<String, dynamic> contact) async {
     var id = contact['id'];
     if (id == null) return Future.value(false);
-//    if (id is String) id = int.parse(id);
-//    List<Map<String, dynamic>> query =
-//        await _this.rawQuery('UPDATE Contacts SET deleted = 1 WHERE id = $id');
-//    return query.length;
-    Map rec = _this.newRec('Contacts', contact);
-    _this.addEntries('Contacts', rec);
-    rec['deleted'] = 1;
-    bool save = await _this.saveMap('Contacts', rec);
-    return save;
-
-//    return _this.delete('Contacts', id);
+    List<Map<String, dynamic>> query =
+        await _this.rawQuery('UPDATE Contacts SET deleted = 1 WHERE id = $id');
+    return query.length > 0;
   }
 
   static Future<int> undeleteContact(Map contact) async {

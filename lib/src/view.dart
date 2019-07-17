@@ -21,14 +21,14 @@
 ///
 ///
 
-export 'package:mxc_application/view.dart';
+export 'package:mvc_application/view.dart';
 
-export 'src/view/ContractsExampleApp.dart';
+export 'view/ContractsExampleApp.dart';
 
-export 'src/view/ContactListPage.dart';
+export 'view/ContactListPage.dart';
 
-export 'src/view/ContactDetailsPage.dart';
+export 'view/ContactDetailsPage.dart';
 
-export 'src/view/AddContactPage.dart';
+export 'view/AddContactPage.dart';
 
-export 'src/view/AddressesTile.dart';
+export 'view/AddressesTile.dart';

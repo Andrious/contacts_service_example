@@ -24,11 +24,11 @@
 import 'package:flutter/material.dart'
     show BuildContext, FormState, GlobalKey, ScaffoldState;
 
-import 'package:contacts_androidx_example/controller.dart' show Controller;
+import 'package:contacts_androidx_example/src/controller.dart' show Controller;
 
-import 'package:contacts_androidx_example/view.dart' show FieldWidgets;
+import 'package:contacts_androidx_example/src/view.dart' show FieldWidgets;
 
-import 'package:contacts_androidx_example/model.dart'
+import 'package:contacts_androidx_example/src/model.dart'
     show
         City,
         Company,

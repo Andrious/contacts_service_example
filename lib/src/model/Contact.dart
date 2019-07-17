@@ -23,9 +23,10 @@
 
 import 'package:flutter/material.dart';
 
-import '../../model.dart' show PostalAddress;
+import 'package:contacts_androidx_example/src/model.dart' show PostalAddress;
 
-import '../../view.dart' show FieldWidgets, Item;
+import 'package:contacts_androidx_example/src/view.dart'
+    show FieldWidgets, Item;
 
 class Contact<E> implements Comparable<Contact> {
   Contact();
@@ -67,7 +68,7 @@ class Contact<E> implements Comparable<Contact> {
   //  set email(String email) => [Item(label: "work", value: email)];
   List<PostalAddress> _postalAddresses;
 
-  Map get toMap {
+  Map<String, dynamic> get toMap {
     var emailList = [];
     var phoneList = [];
 

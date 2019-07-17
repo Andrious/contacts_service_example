@@ -1,7 +1,7 @@
 name: contacts_androidx_example
 description: Demonstrates the MVC design pattern implementation.
 
-version: 1.8.1
+version: 2.0.0
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -10,7 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  mxc_application:
+#  mxc_application:
+#    path: ../../packages/mxc_application
+
+  mvc_application:
+#    path: ../../packages/mvc_application
+    git:
+      url: git://github.com/AndriousSolutions/mvc_application.git
 
 #
 #  # The following adds the Cupertino Icons font to your application.

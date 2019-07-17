@@ -23,17 +23,16 @@
 
 import 'package:flutter/material.dart' show FlutterError, FlutterErrorDetails;
 
-import 'package:mxc_application/app.dart' show Prefs;
-
 /// The Controller talks to the Model
-import 'package:contacts_androidx_example/model.dart'
+import 'package:contacts_androidx_example/src/model.dart'
     show Contact, ContactsService, ContactAdd, ContactEdit, ContactList;
 
-import 'package:contacts_androidx_example/controller.dart' show ControllerMVC;
+import 'package:contacts_androidx_example/src/controller.dart'
+    show ControllerMVC, Prefs;
 
 class Controller extends ControllerMVC {
   factory Controller() {
-    if (_this == null) _this = Controller._();
+    _this ??= Controller._();
     return _this;
   }
   static Controller _this;
@@ -43,9 +42,9 @@ class Controller extends ControllerMVC {
   Controller._() : super();
 
   @override
-  void initState() {
-    init();
-    _sortedAlpha = Prefs.getBool(_SORT_KEY, false);
+  void initState() async {
+    await init();
+    _sortedAlpha = await Prefs.getBoolF(_SORT_KEY, false);
     list.refresh();
   }
 
@@ -55,7 +54,7 @@ class Controller extends ControllerMVC {
     super.dispose();
   }
 
-  static void init() => ContactsService.initState();
+  static Future<void> init() => ContactsService.initState();
 
   static void disposed() => ContactsService.dispose();
 

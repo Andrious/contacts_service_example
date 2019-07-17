@@ -54,14 +54,10 @@ import 'package:flutter/material.dart'
         ThemeData,
         Widget;
 
-import 'package:mxc_application/app.dart' show App;
+import 'package:contacts_androidx_example/src/view.dart'
+    show App, AppMenu, ContactDetailsPage, StateMVC;
 
-import 'package:mxc_application/view.dart' show AppMenu, StateMVC;
-
-import 'package:contacts_androidx_example/view.dart'
-    show AppMenu, ContactDetailsPage, StateMVC;
-
-import 'package:contacts_androidx_example/controller.dart' show Controller;
+import 'package:contacts_androidx_example/src/controller.dart' show Controller;
 
 class ContactListPage extends StatefulWidget {
   ContactListPage({Key key}) : super(key: key);
@@ -81,7 +77,7 @@ class _ContactListState extends StateMVC<ContactListPage> {
     return Theme(
       data: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: App.colorTheme, //Colors.indigo,
+        primarySwatch: App.colorTheme,
         platform: Theme.of(context).platform,
       ),
       child: Scaffold(
