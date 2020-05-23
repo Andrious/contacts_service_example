@@ -8,14 +8,14 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:contacts_androidx_example/src/view.dart' show Item;
+import 'package:contacts_androidx_example/src/view.dart' show DataFieldItem;
 
 import 'package:contacts_androidx_example/src/model.dart'
     show Contact, ContactsService, PostalAddress;
 
 void main() {
   test('should get contacts', () async {
-    final bool init = await ContactsService.initState();
+    final bool init = await ContactsService.initAsync();
     if (!init) return;
     final Iterable contacts = await ContactsService.getContacts();
     expect(contacts.length, greaterThan(0));
@@ -28,8 +28,8 @@ void main() {
   test('should add contact', () async {
     await ContactsService.addContact({
       "givenName": 'givenName',
-      "emails": [Item(label: 'label')],
-      "phones": [Item(label: 'label')],
+      "emails": [DataFieldItem(label: 'label')],
+      "phones": [DataFieldItem(label: 'label')],
       "postalAddresses": [PostalAddress(label: 'label')],
     });
   });
@@ -37,8 +37,8 @@ void main() {
   test('should delete contact', () async {
     await ContactsService.deleteContact({
       "givenName": 'givenName',
-      "emails": [Item(label: 'label')],
-      "phones": [Item(label: 'label')],
+      "emails": [DataFieldItem(label: 'label')],
+      "phones": [DataFieldItem(label: 'label')],
       "postalAddresses": [PostalAddress(label: 'label')],
     });
   });

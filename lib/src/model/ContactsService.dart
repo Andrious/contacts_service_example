@@ -26,21 +26,17 @@ import 'dart:core'
     show Future, List, Map, MapEntry, String, bool, dynamic, int, override;
 
 import 'package:contacts_androidx_example/src/model.dart'
-    show Contact, Database, DBInterface;
+    show Contact, Database, SQLiteDB;
 
-import 'package:contacts_androidx_example/src/view.dart' show Item;
+import 'package:contacts_androidx_example/src/view.dart' show DataFieldItem;
 
-class ContactsService extends DBInterface {
-  factory ContactsService() {
-    _this ??= ContactsService._();
-    return _this;
-  }
-
+class ContactsService extends SQLiteDB {
+  factory ContactsService() => mod;
   /// Make only one instance of this class.
   static ContactsService _this;
 
   /// Allow for easy access to this class throughout the application.
-  static ContactsService get mod => _this ?? ContactsService();
+  static ContactsService get mod => _this ??= ContactsService._();
 
   ContactsService._() : super();
 
@@ -50,7 +46,7 @@ class ContactsService extends DBInterface {
   @override
   get version => 1;
 
-  static Future<bool> initState() => ContactsService().init();
+  static Future<bool> initAsync() => ContactsService().init();
 
   static void dispose() {
     ContactsService().disposed();
@@ -125,11 +121,11 @@ class ContactsService extends DBInterface {
       List<Map<String, dynamic>> phones = await _this.rawQuery(
           'SELECT * FROM Phones WHERE userid = ${contact['id']} AND deleted = 0');
       aContact.phones =
-          phones.map((m) => Item.fromMap(m, 'label', 'phone')).toList();
+          phones.map((m) => DataFieldItem.fromMap(m, 'label', 'phone')).toList();
       List<Map<String, dynamic>> emails = await _this.rawQuery(
           'SELECT * FROM Emails WHERE userid = ${contact['id']} AND deleted = 0');
       aContact.emails =
-          emails.map((m) => Item.fromMap(m, 'label', 'email')).toList();
+          emails.map((m) => DataFieldItem.fromMap(m, 'label', 'email')).toList();
       List<Map<String, dynamic>> addresses = await _this.rawQuery(
           'SELECT * FROM Addresses WHERE userid = ${contact['id']} AND deleted = 0');
 //      aContact.postalAddresses = addresses.map((m) => Item.fromMap(m));

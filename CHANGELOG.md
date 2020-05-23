@@ -1,3 +1,7 @@
+## 2.0.1
+ May 23, 2020
+- compileSdkVersion 29, DataFieldItem,  initAsync();
+
 ## 2.0.0
  July 17, 2019
 - Migrated to MVC design pattern in mvc_application Dart Package.

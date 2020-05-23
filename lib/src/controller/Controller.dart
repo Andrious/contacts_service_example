@@ -31,21 +31,19 @@ import 'package:contacts_androidx_example/src/controller.dart'
     show ControllerMVC, Prefs;
 
 class Controller extends ControllerMVC {
-  factory Controller() {
-    _this ??= Controller._();
-    return _this;
-  }
+  factory Controller() => _this ??=  Controller._();
   static Controller _this;
+  Controller._() : super();
+
   static bool _sortedAlpha;
   static const String _SORT_KEY = 'sort_by_alpha';
 
-  Controller._() : super();
-
   @override
-  void initState() async {
-    await init();
+  Future<bool> initAsync() async  {
+    await ContactsService.initAsync();
     _sortedAlpha = await Prefs.getBoolF(_SORT_KEY, false);
-    list.refresh();
+    List it = await list.refresh();
+    return it.length > 0;
   }
 
   @override
@@ -54,15 +52,12 @@ class Controller extends ControllerMVC {
     super.dispose();
   }
 
-  static Future<void> init() => ContactsService.initState();
-
   static void disposed() => ContactsService.dispose();
 
-  @override
   void onError(FlutterErrorDetails details) =>
       FlutterError.dumpErrorToConsole(details);
 
-  static void rebuild() => _this?.refresh();
+  static void setBuild() => _this?.refresh();
 
   static Future<List<Contact>> getContacts() async {
     List<Contact> contacts = await ContactsService.getContacts();

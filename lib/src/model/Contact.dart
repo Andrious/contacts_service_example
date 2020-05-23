@@ -26,7 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:contacts_androidx_example/src/model.dart' show PostalAddress;
 
 import 'package:contacts_androidx_example/src/view.dart'
-    show FieldWidgets, Item;
+    show FieldWidgets, DataFieldItem;
 
 class Contact<E> implements Comparable<Contact> {
   Contact();
@@ -64,7 +64,7 @@ class Contact<E> implements Comparable<Contact> {
       _postcode,
       _country;
 
-  List<Item> emails, phones;
+  List<DataFieldItem> emails, phones;
   //  set email(String email) => [Item(label: "work", value: email)];
   List<PostalAddress> _postalAddresses;
 
@@ -75,24 +75,24 @@ class Contact<E> implements Comparable<Contact> {
     if (emails == null) {
       emails = [];
       if (_email != null && _email.isNotEmpty) {
-        Item item = Item(label: "home", value: _email);
+        DataFieldItem item = DataFieldItem(label: "home", value: _email);
         item.keys('label', 'email');
         emails.add(item);
       }
     }
-    for (Item email in emails ?? []) {
+    for (DataFieldItem email in emails ?? []) {
       email.keys('label', 'email');
       emailList.add(email.toMap);
     }
     if (phones == null || phones.length == 0) {
       if (_phone != null && _phone.isNotEmpty) {
         phones = [];
-        Item item = Item(label: "home", value: _phone);
+        DataFieldItem item = DataFieldItem(label: "home", value: _phone);
         item.keys('label', 'phone');
         phones.add(item);
       }
     }
-    for (Item phone in phones ?? []) {
+    for (DataFieldItem phone in phones ?? []) {
       phone.keys('label', 'phone');
       phoneList.add(phone.toMap);
     }
@@ -237,10 +237,10 @@ class Id extends FieldWidgets<Contact> {
 class DisplayName extends FieldWidgets<Contact> {
   DisplayName([Contact contact])
       : super(
-          object: contact,
-          label: 'Display Name',
-          value: contact?.displayName,
-        );
+    object: contact,
+    label: 'Display Name',
+    value: contact?.displayName,
+  );
 
   void onSaved(v) => object?.displayName = value = v;
 
@@ -259,7 +259,7 @@ class GivenName extends FieldWidgets<Contact> {
 class MiddleName extends FieldWidgets<Contact> {
   MiddleName([Contact contact])
       : super(
-            object: contact, label: 'Middle Name', value: contact?.middleName);
+      object: contact, label: 'Middle Name', value: contact?.middleName);
 
   void onSaved(v) => object?.middleName = value = v;
 }
@@ -267,10 +267,10 @@ class MiddleName extends FieldWidgets<Contact> {
 class FamilyName extends FieldWidgets<Contact> {
   FamilyName([Contact contact])
       : super(
-          object: contact,
-          label: 'Last Name',
-          value: contact?.familyName,
-        );
+    object: contact,
+    label: 'Last Name',
+    value: contact?.familyName,
+  );
 
   void onSaved(v) => object?.familyName = value = v;
 }
@@ -317,8 +317,8 @@ class Phone extends FieldWidgets<Contact> {
   }
   void onSaved(v) {
     if (v == null) return;
-    if (v is List<Item>) {
-      object?.phones = (v as List<Item>);
+    if (v is List<DataFieldItem>) {
+      object?.phones = (v as List<DataFieldItem>);
       return;
     }
     if (v is String) {
@@ -343,8 +343,8 @@ class Email extends FieldWidgets<Contact> {
 
   void onSaved(v) {
     if (v == null) return;
-    if (v is List<Item>) {
-      object?.emails = (v as List<Item>);
+    if (v is List<DataFieldItem>) {
+      object?.emails = (v as List<DataFieldItem>);
       return;
     }
     if (v is String) {

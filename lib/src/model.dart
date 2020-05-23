@@ -23,6 +23,8 @@
 
 export 'package:mvc_application/model.dart';
 
+export 'package:dbutils/sqlite_db.dart';
+
 export 'model/Contact.dart';
 
 export 'model/Contacts.dart';

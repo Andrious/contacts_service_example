@@ -57,7 +57,40 @@ import 'package:flutter/material.dart'
 import 'package:contacts_androidx_example/src/view.dart'
     show App, AppMenu, ContactDetailsPage, StateMVC;
 
-import 'package:contacts_androidx_example/src/controller.dart' show Controller;
+import 'package:contacts_androidx_example/src/controller.dart'
+    show
+        App,
+        AppBar,
+        Border,
+        BorderSide,
+        BoxDecoration,
+        Brightness,
+        BuildContext,
+        Center,
+        CircularProgressIndicator,
+        Colors,
+        Container,
+        Controller,
+        DismissDirection,
+        FlatButton,
+        FloatingActionButton,
+        Icon,
+        Icons,
+        Key,
+        ListTile,
+        ListView,
+        MaterialPageRoute,
+        Navigator,
+        SafeArea,
+        Scaffold,
+        SnackBar,
+        SnackBarAction,
+        State,
+        StatefulWidget,
+        Text,
+        Theme,
+        ThemeData,
+        Widget; 
 
 class ContactListPage extends StatefulWidget {
   ContactListPage({Key key}) : super(key: key);
@@ -70,6 +103,12 @@ class _ContactListState extends StateMVC<ContactListPage> {
     con = controller;
   }
   Controller con;
+
+  void initState() {
+    super.initState();
+    // Init asynchronous operations.
+    initAsync();
+  }
 
   @override
   Widget build(BuildContext context) {

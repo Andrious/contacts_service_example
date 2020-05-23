@@ -51,6 +51,7 @@ import 'package:contacts_androidx_example/src/model.dart'
         Suffix;
 
 class ContactAdd extends ContactEdit {
+
   @override
   void init([Object contact]) {
     super.init(contact);
@@ -69,6 +70,7 @@ class ContactAdd extends ContactEdit {
 }
 
 class ContactEdit extends ContactList {
+
   bool _inForm = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   PostalAddress _address = PostalAddress(label: "");
@@ -81,29 +83,24 @@ class ContactEdit extends ContactList {
   }
 
   Future add([Contact contact]) {
-    if (contact == null) {
-      contact = _contact;
-    }
+    contact ??= _contact;
     return ContactsService.addContact(contact.toMap);
   }
 
   Future<bool> delete([Contact contact]) async {
-    if (contact == null) {
-      contact = _contact;
-    }
+    contact ??= _contact;
     bool delete = await ContactsService.deleteContact(contact.toMap);
     return delete;
   }
 
   Future<int> undelete([Contact contact]) {
-    if (contact == null) {
-      contact = _contact;
-    }
+    contact ??= _contact;
     return ContactsService.undeleteContact(contact.toMap);
   }
 }
 
 class ContactList extends ContactFields {
+
   Contact _contact;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -112,13 +109,13 @@ class ContactList extends ContactFields {
 
   Future<List<Contact>> refresh() async {
     _contacts = await Controller.getContacts();
-    Controller.rebuild();
+    Controller.setBuild();
     return _contacts;
   }
 
   void sort() async {
     _contacts = await Controller.sort();
-    Controller.rebuild();
+    Controller.setBuild();
   }
 
   void init([Object contact]) {
@@ -148,6 +145,7 @@ class ContactList extends ContactFields {
 }
 
 class ContactFields {
+
   FieldWidgets<Contact> _id,
       _displayName,
       _givenName,
