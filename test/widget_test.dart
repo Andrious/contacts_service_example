@@ -8,16 +8,21 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:contacts_androidx_example/src/model.dart' show Contact;
+
+import 'package:contacts_androidx_example/src/controller.dart';
+
 import 'package:contacts_androidx_example/src/view.dart' show DataFieldItem;
 
-import 'package:contacts_androidx_example/src/model.dart'
-    show Contact, ContactsService, PostalAddress;
-
 void main() {
+  final Controller con = Controller();
+  final Contact contact = Contact();
   test('should get contacts', () async {
-    final bool init = await ContactsService.initAsync();
-    if (!init) return;
-    final Iterable contacts = await ContactsService.getContacts();
+    final bool init = await con.initAsync();
+    if (!init) {
+      return;
+    }
+    final Iterable<Contact> contacts = await con.getContacts();
     expect(contacts.length, greaterThan(0));
     expect(contacts, everyElement(isInstanceOf<Contact>()));
 //    expect(contacts.toList()[0].givenName, 'givenName1');
@@ -25,23 +30,21 @@ void main() {
 //    expect(contacts.toList()[1].emails.toList()[0].label, 'label');
   });
 
-  test('should add contact', () async {
-    await ContactsService.addContact({
-      "givenName": 'givenName',
-      "emails": [DataFieldItem(label: 'label')],
-      "phones": [DataFieldItem(label: 'label')],
-      "postalAddresses": [PostalAddress(label: 'label')],
-    });
-  });
-
-  test('should delete contact', () async {
-    await ContactsService.deleteContact({
-      "givenName": 'givenName',
-      "emails": [DataFieldItem(label: 'label')],
-      "phones": [DataFieldItem(label: 'label')],
-      "postalAddresses": [PostalAddress(label: 'label')],
-    });
-  });
+  // test('should add contact', () async {
+  //   await contact.add({
+  //     'givenName': 'givenName',
+  //     'emails': [DataFieldItem(label: 'label')],
+  //     'phones': [DataFieldItem(label: 'label')],
+  //   });
+  // });
+  //
+  // test('should delete contact', () async {
+  //   await contact.delete({
+  //     'givenName': 'givenName',
+  //     'emails': [DataFieldItem(label: 'label')],
+  //     'phones': [DataFieldItem(label: 'label')],
+  //   });
+  // });
 }
 
 void expectMethodCall(List<MethodCall> log, String methodName) {
@@ -63,16 +66,6 @@ void expectMethodCall(List<MethodCall> log, String methodName) {
         ],
         'phones': [
           {'label': 'label', 'value': null}
-        ],
-        'postalAddresses': [
-          {
-            'label': 'label',
-            'street': null,
-            'city': null,
-            'postcode': null,
-            'region': null,
-            'country': null
-          }
         ],
         'avatar': null
       },

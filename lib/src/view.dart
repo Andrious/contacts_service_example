@@ -19,16 +19,10 @@
 ///
 ///          Created  16 Dec 2018
 ///
-///
 
 export 'package:mvc_application/view.dart';
 
-export 'view/ContractsExampleApp.dart';
-
-export 'view/ContactListPage.dart';
-
-export 'view/ContactDetailsPage.dart';
-
-export 'view/AddContactPage.dart';
-
-export 'view/AddressesTile.dart';
+export 'view/app/contacts_example_app.dart';
+export 'view/home/add_contact.dart';
+export 'view/home/contact_details.dart';
+export 'view/home/contacts_list.dart';

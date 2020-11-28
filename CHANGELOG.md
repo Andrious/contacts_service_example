@@ -1,3 +1,9 @@
+## 2.1.0
+ November 26, 2020
+- Updated with the Dart package, mvc_application, own example app.
+- Stricter Lint Rules
+- Updated from older version of the Android embedding
+
 ## 2.0.1
  May 23, 2020
 - compileSdkVersion 29, DataFieldItem,  initAsync();

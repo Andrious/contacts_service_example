@@ -1,7 +1,7 @@
 name: contacts_androidx_example
 description: Demonstrates the MVC design pattern implementation.
 
-version: 2.0.1
+version: 2.1.0
 
 environment:
   sdk: ">=2.5.0 <3.0.0"
@@ -12,8 +12,8 @@ dependencies:
 
   dbutils: ^2.0.0
 
-  mvc_application: ^5.0.0
-  #  path: ../../packages/mvc_application
+  mvc_application: #^6.0.0
+    path: ../../packages/mvc_application
 #    git:
 #      url: git://github.com/AndriousSolutions/mvc_application.git
 

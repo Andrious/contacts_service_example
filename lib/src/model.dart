@@ -1,3 +1,5 @@
+export 'model/contact.dart';
+
 ///
 /// Copyright (C) 2018 Andrious Solutions
 ///
@@ -21,14 +23,5 @@
 ///
 ///
 
-export 'package:mvc_application/model.dart';
-
-export 'package:dbutils/sqlite_db.dart';
-
-export 'model/Contact.dart';
-
-export 'model/Contacts.dart';
-
-export 'model/ContactsService.dart';
-
-export 'model/PostalAddress.dart';
+export 'model/contact_fields.dart';
+export 'model/contacts_db.dart';
